@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import QuoteBox from "./Components/QuoteBox";
 import { quoteGenerator } from "./script";
 
@@ -17,17 +17,13 @@ function App() {
         }
       })
       .catch((error) => console.error("Error:", error));
-  
+
     console.log(selectedValue);
   };
 
   const handleSelectChange = (value) => {
     setSelectedValue(() => value);
   };
-
-  useEffect(() => {
-    console.log(quote);
-  }, [quote]);
 
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100 px-2 sm:px-0">

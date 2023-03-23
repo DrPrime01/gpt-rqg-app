@@ -1,4 +1,8 @@
 import React from "react";
+import { FiClipboard } from "react-icons/fi";
+import { RiWhatsappFill } from "react-icons/ri";
+import { FaTwitter } from "react-icons/fa";
+
 
 function QuoteBox({ generateQuote, onSelectChange, selectedValue, quote }) {
   const quoteFilterOptions = [
@@ -25,13 +29,26 @@ function QuoteBox({ generateQuote, onSelectChange, selectedValue, quote }) {
   const handleSelectChange = (e) => {
     onSelectChange(e.target.value);
   };
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(quote);
+      alert("Quote copied to clipboard");
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+    }
+  };
+
   return (
     <div className="col-md-6">
       <div className="h-100 p-5 text-white bg-dark rounded-3">
-        <h2>Quote Of The Day</h2>
-        <p>
-          {quote ? quote : "Generate beautiful quotes..."}
-        </p>
+        <div className="d-flex flex-row justify-content-between align-items-center">
+          <h2>Quote Of The Day</h2>
+          <a onClick={copyToClipboard} className="clipboard">
+            <FiClipboard className="grey-icons" />
+          </a>
+        </div>
+        <p>{quote ? quote : "Generate beautiful quotes..."}</p>
         <div className="d-flex flex-row justify-content-between">
           <button
             className="btn btn-outline-light"
@@ -47,6 +64,21 @@ function QuoteBox({ generateQuote, onSelectChange, selectedValue, quote }) {
           >
             {quoteFilterOption}
           </select>
+        </div>
+        <div className="socials mt-4">
+          <a
+            target="_blank"
+            href={`https://twitter.com/intent/tweet?text=${quote}`}
+            className="me-2"
+          >
+            <FaTwitter className="grey-icons"/>
+          </a>
+          <a
+            target="_blank"
+            href={`https://api.whatsapp.com/send?text=${quote}`}
+          >
+            <RiWhatsappFill className="grey-icons"/>
+          </a>
         </div>
       </div>
     </div>
