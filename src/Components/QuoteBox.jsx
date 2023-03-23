@@ -1,6 +1,6 @@
 import React from "react";
 
-function QuoteBox({ generateQuote, onSelectChange, selectedValue }) {
+function QuoteBox({ generateQuote, onSelectChange, selectedValue, quote }) {
   const quoteFilterOptions = [
     "Filter",
     "Inspiration",
@@ -12,11 +12,11 @@ function QuoteBox({ generateQuote, onSelectChange, selectedValue }) {
   ];
   const quoteFilterOption = quoteFilterOptions.map((option, i) => {
     return option === "Filter" ? (
-      <option value="" key={i} disabled defaultValue>
+      <option value="" key={i} disabled defaultValue className="text-dark">
         {option}
       </option>
     ) : (
-      <option value={option} key={i}>
+      <option value={option} key={i} className="text-dark">
         {option}
       </option>
     );
@@ -24,15 +24,13 @@ function QuoteBox({ generateQuote, onSelectChange, selectedValue }) {
 
   const handleSelectChange = (e) => {
     onSelectChange(e.target.value);
-  }
+  };
   return (
     <div className="col-md-6">
       <div className="h-100 p-5 text-white bg-dark rounded-3">
         <h2>Quote Of The Day</h2>
         <p>
-          Swap the background-color utility and add a `.text-*` color utility to
-          mix up the jumbotron look. Then, mix and match with additional
-          component themes and more.
+          {quote ? quote : "Generate beautiful quotes..."}
         </p>
         <div className="d-flex flex-row justify-content-between">
           <button
@@ -42,7 +40,11 @@ function QuoteBox({ generateQuote, onSelectChange, selectedValue }) {
           >
             Generate
           </button>
-          <select value={selectedValue} onChange={handleSelectChange}>
+          <select
+            value={selectedValue}
+            onChange={handleSelectChange}
+            className="bg-transparent border rounded-3 text-white p-2"
+          >
             {quoteFilterOption}
           </select>
         </div>
