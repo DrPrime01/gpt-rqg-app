@@ -1,6 +1,4 @@
-import { API_KEY } from "../keys.js";
-
-const apiKey = API_KEY;
+const apiKey = process.env.REACT_APP_API_KEY;
 
 export function quoteGenerator(value) {
   return fetch("https://api.openai.com/v1/chat/completions", {
