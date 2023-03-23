@@ -1,7 +1,11 @@
 import React from "react";
+
 import { FiClipboard } from "react-icons/fi";
 import { RiWhatsappFill } from "react-icons/ri";
 import { FaTwitter } from "react-icons/fa";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function QuoteBox({ generateQuote, onSelectChange, selectedValue, quote }) {
@@ -33,13 +37,15 @@ function QuoteBox({ generateQuote, onSelectChange, selectedValue, quote }) {
   const copyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(quote);
-      alert("Quote copied to clipboard");
+      toast.success("Quote copied to clipboard");
     } catch (err) {
       console.error("Failed to copy text: ", err);
     }
   };
 
   return (
+    <>
+    <ToastContainer />
     <div className="col-md-6">
       <div className="h-100 p-5 text-white bg-dark rounded-3">
         <div className="d-flex flex-row justify-content-between align-items-center">
@@ -82,6 +88,7 @@ function QuoteBox({ generateQuote, onSelectChange, selectedValue, quote }) {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
